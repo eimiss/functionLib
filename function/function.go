@@ -1,5 +1,5 @@
-package greeter
+package function
 
-type Greeter interface {
-	Greet(name string) string
+type Function interface {
+	Execute(input string) string
 }

@@ -1,15 +1,15 @@
-package greeter
+package function
 
 import "fmt"
 
-type EnglishGreeter struct{}
+type EnglishFunction struct{}
 
-func (EnglishGreeter) Greet(name string) string {
-	return fmt.Sprintf("Hello, %s!", name)
+func (EnglishFunction) Execute(input string) string {
+	return fmt.Sprintf("Hello, %s!", input)
 }
 
-type SpanishGreeter struct{}
+type SpanishFunction struct{}
 
-func (SpanishGreeter) Greet(name string) string {
-	return fmt.Sprintf("¡Hola, %s!", name)
+func (SpanishFunction) Execute(input string) string {
+	return fmt.Sprintf("¡Hola, %s!", input)
 }

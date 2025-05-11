@@ -4,26 +4,26 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/eimiss/library/function"
+	"github.com/eimiss/functionLib/function"
 )
 
 type Handler struct {
-	Greeter function.Greeter
+	Fn function.Function
 }
 
-func NewHandler(g function.Greeter) *Handler {
-	return &Handler{Greeter: g}
+func NewHandler(fn function.Function) *Handler {
+	return &Handler{Fn: fn}
 }
 
-func (h *Handler) GreetHandler(w http.ResponseWriter, r *http.Request) {
-	name := r.URL.Query().Get("name")
-	if name == "" {
-		name = "World"
+func (h *Handler) ExecuteHandler(w http.ResponseWriter, r *http.Request) {
+	input := r.URL.Query().Get("input")
+	if input == "" {
+		input = "World"
 	}
 
-	message := h.Greeter.Greet(name)
+	result := h.Fn.Execute(input)
 
 	json.NewEncoder(w).Encode(map[string]string{
-		"message": message,
+		"result": result,
 	})
 }

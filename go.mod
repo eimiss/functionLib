@@ -1,3 +1,3 @@
-module github.com/eimiss/library
+module github.com/eimiss/functionLib
 
 go 1.20

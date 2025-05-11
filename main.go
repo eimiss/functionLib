@@ -4,20 +4,18 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/eimiss/library/api"
-	"github.com/eimiss/library/app"
-	"github.com/eimiss/library/function"
+	"github.com/eimiss/functionLib/api"
+	"github.com/eimiss/functionLib/app"
+	"github.com/eimiss/functionLib/function"
 )
 
 func main() {
-	// Command-line run
-	myGreeter := greeter.EnglishGreeter{}
-	myApp := app.NewApp(myGreeter)
+	fn := function.EnglishFunction{}
+	myApp := app.NewApp(fn)
 	myApp.Run("Alice")
 
-	// Start HTTP server
-	handler := api.NewHandler(myGreeter)
-	http.HandleFunc("/greet", handler.GreetHandler)
-	log.Println("Listening on :8080")
+	handler := api.NewHandler(fn)
+	http.HandleFunc("/execute", handler.ExecuteHandler)
+	log.Println("Server running on :8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }

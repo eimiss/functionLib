@@ -3,18 +3,18 @@ package app
 import (
 	"fmt"
 
-	"github.com/eimiss/library/function"
+	"github.com/eimiss/functionLib/function"
 )
 
 type App struct {
-	Greeter function.Greeter
+	Fn function.Function
 }
 
-func NewApp(g function.Greeter) *App {
-	return &App{Greeter: g}
+func NewApp(fn function.Function) *App {
+	return &App{Fn: fn}
 }
 
-func (a *App) Run(name string) {
-	msg := a.Greeter.Greet(name)
-	fmt.Println(msg)
+func (a *App) Run(input string) {
+	result := a.Fn.Execute(input)
+	fmt.Println(result)
 }
