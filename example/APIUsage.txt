@@ -1,0 +1,6 @@
+Example usage:
+go run .\example.go
+
+API usage example:
+curl --output - "http://localhost:8080/ascii?input=path_to_image&distance=200000&width=50&colored=true"
+Example of path_to_image: C:/images/cat.png

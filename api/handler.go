@@ -1,8 +1,8 @@
 package api
 
 import (
-	"encoding/json"
 	"net/http"
+	"strconv"
 
 	"github.com/eimiss/functionLib/function"
 )
@@ -16,14 +16,42 @@ func NewHandler(fn function.Function) *Handler {
 }
 
 func (h *Handler) ExecuteHandler(w http.ResponseWriter, r *http.Request) {
+	// Parse query parameters
 	input := r.URL.Query().Get("input")
+	distanceStr := r.URL.Query().Get("distance")
+	widthStr := r.URL.Query().Get("width")
+	coloredStr := r.URL.Query().Get("colored")
+
 	if input == "" {
-		input = "World"
+		http.Error(w, "'input' parameter is required", http.StatusBadRequest)
+		return
 	}
 
-	result := h.Fn.Execute(input)
+	// Convert string params to proper types
+	distance, err := strconv.Atoi(distanceStr)
+	if err != nil {
+		http.Error(w, "'distance' must be an integer", http.StatusBadRequest)
+		return
+	}
+	width, err := strconv.Atoi(widthStr)
+	if err != nil {
+		http.Error(w, "'width' must be an integer", http.StatusBadRequest)
+		return
+	}
+	colored, err := strconv.ParseBool(coloredStr)
+	if err != nil {
+		http.Error(w, "'colored' must be true or false", http.StatusBadRequest)
+		return
+	}
 
-	json.NewEncoder(w).Encode(map[string]string{
-		"result": result,
-	})
+	// Run the ASCII function
+	result, err := h.Fn.Execute(input, distance, width, colored)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Send raw colored text output
+	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+	w.Write([]byte(result))
 }

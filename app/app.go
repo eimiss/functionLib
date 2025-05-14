@@ -14,7 +14,11 @@ func NewApp(fn function.Function) *App {
 	return &App{Fn: fn}
 }
 
-func (a *App) Run(input string) {
-	result := a.Fn.Execute(input)
+func (a *App) Run(inputPath string, euclideanDistance int, widthImage int, isColored bool) {
+	result, err := a.Fn.Execute(inputPath, euclideanDistance, widthImage, isColored)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
 	fmt.Println(result)
 }
