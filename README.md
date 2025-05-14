@@ -1,6 +1,6 @@
 # functionLib
 
-Image-to-ASCII art generator with optional colored output and edge detection. Includes HTTP API support.
+Image-to-ASCII art generator with optional colored output and edge detection via difference in colour. Includes HTTP API support.
 
 ## Usage (Go code)
 
