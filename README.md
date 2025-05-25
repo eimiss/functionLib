@@ -52,3 +52,6 @@ func main() {
     }
     fmt.Println(result)
 }
+```
+## Example
+![examplephoto](https://github.com/user-attachments/assets/59fe44b3-c94d-4501-a266-8dff36f29217)
