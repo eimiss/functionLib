@@ -1,7 +1,7 @@
 # functionLib
-
 Image-to-ASCII art generator with optional colored output and edge detection via difference in colour. Includes HTTP API support.
-# Using as API
+
+# Using as API (for curl/postman)
 Clone this repository
 
 Configure your golang (1.20 version needs to be installed)
@@ -31,6 +31,14 @@ Run the client `go run main.go`
 IF you want to test the functionality without any additional work, there is an example folder.
 
 Just run example file and you will get some of the results.
+
+## Variables
+These are the variables of the component. Structure: name:name when using in html/curl:type - description
+•	inputPath:input:string – image input path.
+•	euclideanDistance:distance:int – euclidean distance.
+•	widthImage:width:int – photo width.
+•	isColored:colored:bool – is colored required boolean.
+
 ## Usage (Go code)
 
 ```go

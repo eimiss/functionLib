@@ -10,6 +10,8 @@ import (
 	"github.com/nfnt/resize"
 )
 
+// ImageToASCIIFunction is a stateless function that converts images (PNG or JPEG) to ASCII art.
+// It supports optional colored output using ANSI escape sequences.
 type ImageToASCIIFunction struct{}
 
 var asciiChars = "@%#*+=-:. "
@@ -155,7 +157,17 @@ func markEdgeO(ascii [][]rune, height, width int) [][]bool {
 	return edgeMask
 }
 
-// Generate ASCII art from image
+// Execute converts an image to ASCII art.
+//
+// Parameters:
+//   - inputPath: path to the image (relative or absolute).
+//   - euclideanDistance: threshold for edge detection.
+//   - widthImage: desired output width in characters.
+//   - isColored: whether the ASCII art should be colorized.
+//
+// Returns:
+//   - ASCII string representation of the image.
+//   - An error if decoding or processing fails.
 func (f ImageToASCIIFunction) Execute(inputPath string, euclideanDistance int, widthImage int, isColored bool) (string, error) {
 	file, err := os.Open(inputPath)
 	if err != nil {

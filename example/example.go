@@ -7,6 +7,7 @@ import (
 	"github.com/eimiss/functionLib/function"
 )
 
+// This example shows how to use the ImageToASCIIFunction struct to convert various images to ASCII art.
 func main() {
 	fn := function.ImageToASCIIFunction{}
 	result, err := fn.Execute("cat.png", 200000, 50, true) // or path to any image

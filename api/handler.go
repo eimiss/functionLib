@@ -7,14 +7,18 @@ import (
 	"github.com/eimiss/functionLib/function"
 )
 
+// The Handler struct represents an HTTP handler that wraps a function.Function object.
 type Handler struct {
 	Fn function.Function
 }
 
+// NewHandler(fn function.Function) *Handler: Creates a new Handler instance with the given function.Function object.
 func NewHandler(fn function.Function) *Handler {
 	return &Handler{Fn: fn}
 }
 
+// (h *Handler) ExecuteHandler(w http.ResponseWriter, r *http.Request):
+// Handles an HTTP request by executing the wrapped function.Function object with query parameters from the request.
 func (h *Handler) ExecuteHandler(w http.ResponseWriter, r *http.Request) {
 	// Parse query parameters
 	input := r.URL.Query().Get("input")
